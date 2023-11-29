@@ -23,13 +23,23 @@ void display(Node * root)
 }
 int Maximun_Node(Node *root)
 {
-    if(root==NULL) return INT8_MIN ;
-    return max(root->val,max(Maximun_Node(root->left),Maximun_Node(root->right)));
+    int mn=INT8_MIN;
+    while(root!=NULL)
+    {
+        mn=max(mn,root->val);
+        root=root->right;
+    }
+    return mn;
 }
 int Minimun_Node(Node *root)
 {
-    if(root==NULL) return INT8_MAX;
-    return min(root->val,min(Minimun_Node(root->left),Minimun_Node(root->right)));
+    int mn=INT8_MAX;
+    while(root!=NULL)
+    {
+        mn=min(mn,root->val);
+        root=root->left;
+    }
+    return mn;
 }
 int main()
 {
@@ -63,10 +73,8 @@ int main()
     g->left=n;
     g->right=o;
     display(a);
-    int mx=Maximun_Node(a->right);
-    mx=max(a->val,mx);
-    int mi=Minimun_Node(a->left);
-    mi=min(mi,a->val);
+    int mx=Maximun_Node(a);
+    int mi=Minimun_Node(a);
     cout<<endl<<mx<<" "<<mi;
     return 0;
 }
